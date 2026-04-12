@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>chanio — The extension that makes your health AI personal</title>
-<meta name="description" content="chanio is a free browser extension that builds your health identity from how you browse — and makes every site in the HarnessHealth network know exactly who you are and what you need.">
-<meta property="og:title" content="chanio — Install it. Get twice as much from every health AI.">
-<meta property="og:description" content="Without chanio you get half as much. Install free in 30 seconds.">
+<title>chanio — Health identity infrastructure</title>
+<meta name="description" content="chanio is the identity layer the health internet has been missing. Like Stripe for payments or Auth0 for login — one integration and every visitor to your health site arrives already known.">
+<meta property="og:title" content="chanio — The identity layer the health internet has been missing">
+<meta property="og:description" content="Your conditions, your role, your family context — fires to every health site you visit before you say a word. Infrastructure for users. SDK for builders.">
 <meta property="og:url" content="https://chanio.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800;900&display=swap" rel="stylesheet">
@@ -268,6 +268,157 @@ nav{
   font-family:'Menlo','Monaco',monospace;
 }
 
+/* AI ARCHITECTURE */
+.ai-outer{background:var(--ink);padding:96px 32px;border-top:1px solid var(--border)}
+.ai-inner{max-width:960px;margin:0 auto}
+.ai-stack{display:flex;flex-direction:column;gap:3px;margin-top:52px}
+.ai-layer{
+  display:grid;grid-template-columns:200px 1fr 200px;gap:0;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:0;overflow:hidden;
+  transition:border-color 0.15s;
+  position:relative;
+}
+.ai-layer:first-child{border-radius:14px 14px 0 0}
+.ai-layer:last-child{border-radius:0 0 14px 14px}
+.ai-layer:hover{border-color:var(--border-mid);z-index:1}
+.ai-layer-id{
+  padding:22px 20px;
+  background:var(--surface-mid);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;justify-content:center;gap:6px;
+}
+.ai-layer-num{font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-low)}
+.ai-layer-name{font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;color:#fff;line-height:1.3}
+.ai-layer-model{
+  display:inline-flex;align-items:center;gap:5px;
+  margin-top:4px;padding:3px 8px;border-radius:5px;
+  font-size:10px;font-weight:700;letter-spacing:0.04em;
+  background:var(--surface-high);color:var(--text-low);
+  width:fit-content;font-family:'Menlo','Monaco',monospace;
+}
+.ai-layer-body{padding:22px 24px;border-right:1px solid var(--border)}
+.ai-layer-trigger{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.trigger-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.ai-layer-desc{font-size:13px;color:var(--text-mid);line-height:1.65}
+.ai-layer-output{padding:22px 20px;display:flex;flex-direction:column;justify-content:center;gap:8px}
+.output-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-low);margin-bottom:2px}
+.output-tag{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 10px;border-radius:6px;
+  font-size:11px;font-weight:600;color:var(--green);
+  background:var(--green-dim);border:1px solid rgba(78,222,163,0.15);
+  width:fit-content;line-height:1;
+}
+.ai-synthesis-bridge{
+  margin:32px 0;padding:28px 32px;
+  background:var(--indigo-dim);border:1px solid rgba(124,111,255,0.2);
+  border-radius:14px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;
+}
+@media(max-width:700px){.ai-synthesis-bridge{grid-template-columns:1fr;text-align:center}}
+.synthesis-inputs{display:flex;flex-direction:column;gap:6px}
+.synthesis-input-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;color:var(--text-mid);font-weight:600;
+}
+.synthesis-input-tag::before{content:'';display:inline-block;width:6px;height:1px;background:var(--indigo-light);flex-shrink:0}
+.synthesis-arrow{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  color:var(--indigo-light);
+}
+.synthesis-arrow svg{width:28px;height:28px;stroke:currentColor;stroke-width:1.5;fill:none}
+.synthesis-arrow span{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-low)}
+.synthesis-output{
+  background:var(--surface);border:1px solid rgba(124,111,255,0.25);
+  border-radius:10px;padding:18px 20px;
+}
+.synthesis-output-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--indigo-light);margin-bottom:8px}
+.synthesis-output-title{font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:#fff;margin-bottom:6px}
+.synthesis-output-desc{font-size:12px;color:var(--text-mid);line-height:1.6}
+.signal-bar{
+  margin-top:32px;padding:24px 28px;
+  background:var(--surface-mid);border:1px solid var(--border-mid);
+  border-radius:12px;
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+}
+.signal-label{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-low);flex-shrink:0}
+.signal-tags{display:flex;flex-wrap:wrap;gap:6px;flex:1}
+.signal-tag{
+  padding:5px 10px;border-radius:6px;
+  font-size:11px;font-weight:700;font-family:'Menlo','Monaco',monospace;
+  background:var(--surface-high);color:var(--text-mid);
+  border:1px solid var(--border-mid);
+}
+.signal-dest{font-size:12px;color:var(--text-low);margin-left:auto;flex-shrink:0}
+@media(max-width:840px){
+  .ai-layer{grid-template-columns:1fr}
+  .ai-layer-id{border-right:none;border-bottom:1px solid var(--border)}
+  .ai-layer-body{border-right:none;border-bottom:1px solid var(--border)}
+}
+
+/* COMMUNITY */
+.community-outer{background:var(--surface);padding:80px 32px;border-top:1px solid var(--border)}
+.community-inner{max-width:900px;margin:0 auto}
+.feed-grid{display:grid;grid-template-columns:240px 1fr;gap:32px;margin-top:48px}
+@media(max-width:720px){.feed-grid{grid-template-columns:1fr}}
+.subreddit-list{display:flex;flex-direction:column;gap:4px}
+.subreddit-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;border-radius:10px;
+  cursor:pointer;border:1px solid transparent;
+  transition:background 0.12s,border-color 0.12s;
+}
+.subreddit-item:hover,.subreddit-item.active{
+  background:var(--indigo-dim);border-color:rgba(124,111,255,0.2);
+}
+.subreddit-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.subreddit-name{font-size:13px;font-weight:600;color:var(--text)}
+.subreddit-count{font-size:11px;color:var(--text-low);margin-left:auto}
+.post-feed{display:flex;flex-direction:column;gap:16px}
+.post-card{
+  background:var(--surface-mid);border:1px solid var(--border);
+  border-radius:14px;padding:20px 22px;
+  transition:border-color 0.12s;
+}
+.post-card:hover{border-color:rgba(124,111,255,0.25)}
+.post-meta{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.post-avatar{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--indigo-dim);border:1px solid rgba(124,111,255,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:var(--indigo-light);flex-shrink:0;
+}
+.post-author{font-size:12px;color:var(--text-low)}
+.post-author strong{color:var(--text-mid);font-weight:600}
+.post-tag{
+  font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+  padding:3px 8px;border-radius:5px;
+  background:var(--indigo-dim);color:var(--indigo-light);
+  margin-left:auto;
+}
+.post-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.4}
+.post-body{font-size:13px;color:var(--text-mid);line-height:1.65}
+.post-footer{display:flex;align-items:center;gap:16px;margin-top:14px}
+.post-vote{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text-low);font-weight:600}
+.post-vote svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none}
+.post-chanio{
+  margin-left:auto;font-size:11px;color:var(--indigo-light);
+  font-weight:600;display:flex;align-items:center;gap:4px;
+}
+.post-chanio svg{width:11px;height:11px;stroke:currentColor;stroke-width:2;fill:none}
+.community-note{
+  margin-top:24px;padding:18px 22px;
+  background:var(--indigo-dim);border:1px solid rgba(124,111,255,0.15);
+  border-radius:12px;font-size:13px;color:var(--text-mid);line-height:1.6;
+}
+.community-note strong{color:var(--text)}
+
 /* BOTTOM CTA */
 .bottom-cta{
   background:var(--ink);
@@ -324,7 +475,9 @@ nav{
   <div class="nav-right">
     <a href="#how" class="nav-link">How it works</a>
     <a href="#network" class="nav-link">Network</a>
-    <a href="#install" class="nav-install">Install free</a>
+    <a href="#ai-stack" class="nav-link">Intelligence</a>
+    <a href="#for-sites" class="nav-link" style="color:var(--indigo-light)">For sites</a>
+    <a href="#install" class="nav-install">Get chanio</a>
   </div>
 </nav>
 
@@ -332,55 +485,55 @@ nav{
 <div class="hero">
   <div class="hero-badge">
     <div class="dot"></div>
-    Free Chrome extension
+    Health identity infrastructure
   </div>
-  <h1>Install it once.<br><em>Every health AI</em><br>knows who you are.</h1>
-  <p class="hero-sub">chanio is a free browser extension that builds your health identity from how you browse — and signals it to every site in the HarnessHealth network. Without it, you get half as much.</p>
+  <h1>The identity layer<br>the health internet<br><em style="font-style:normal;color:var(--indigo-light)">has been missing.</em></h1>
+  <p class="hero-sub">chanio is not an app. It is infrastructure. A living consciousness built from your vault, your health record, your browsing, and your family — that fires to every health site you visit before you say a word. Like Stripe for payments. Like Auth0 for login. chanio for health identity.</p>
   <div class="hero-actions">
     <a href="#install" class="btn-install">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Install for Chrome — free
+      Get chanio — free
     </a>
-    <a href="https://harnesshealth.ai/connect" class="btn-ghost">Add to Claude Desktop</a>
+    <a href="#for-sites" class="btn-ghost">Add chanio to your site</a>
   </div>
-  <p class="hero-note">Works in Chrome · Arc · Brave · Edge &nbsp;·&nbsp; <strong>30 seconds to install</strong></p>
+  <p class="hero-note">Browser extension · MCP connector · SDK for sites &nbsp;·&nbsp; <strong>free to start</strong></p>
 </div>
 
 <!-- HALF UTILITY BAR -->
 <div class="half-bar">
-  <p>Without chanio, every HarnessHealth site sees you as an anonymous visitor. With it, <strong>surgeonvalue.com knows you're a surgeon. co-op.care knows you have a parent aging at home. ClinicalSwipe knows your specialty.</strong> The network personalizes itself to you — automatically.</p>
+  <p>Every health site today treats you as a stranger. You arrive, fill out a form, answer the same questions, start from zero. <strong>chanio ends that. Your identity — your conditions, your role, your family context, your care history — fires to every site in the network the instant you arrive. No form. No login. Just context, already there.</strong></p>
 </div>
 
 <!-- HOW IT WORKS -->
 <div class="section" id="how">
   <div class="kicker">How it works</div>
-  <h2 class="section-headline">Passive. Private. Instant.</h2>
-  <p class="section-body">chanio runs quietly in your browser. No forms, no surveys, no setup. It reads your browsing patterns and builds a health profile that travels with you across every site in the network.</p>
+  <h2 class="section-headline">Store it. Read it. Share it<br>with the people who need it.</h2>
+  <p class="section-body">chanio is three things at once: a place to store anything health-related, a reader that builds your story from how you browse, and a connection layer that shares your record with your loved ones and every health AI in the network.</p>
 
   <div class="steps-grid">
     <div class="step-card">
       <div class="step-num">1</div>
-      <h3>Install in 30 seconds</h3>
-      <p>Add chanio to Chrome, Arc, Brave, or Edge. No account required. No personal information asked at setup.</p>
-      <span class="step-time">30 seconds</span>
+      <h3>Store anything</h3>
+      <p>Drop in labs, PDFs, photos of prescriptions, notes from doctor visits, medication lists. chanio holds it all in one place — searchable, organized, yours. No app to learn. Just save it here.</p>
+      <span class="step-time">Your health drawer</span>
     </div>
     <div class="step-card">
       <div class="step-num">2</div>
-      <h3>chanio watches passively</h3>
-      <p>It observes browsing patterns locally — on your device, not our servers. No interruptions. No pop-ups. No data leaves your machine.</p>
+      <h3>chanio reads your browsing story</h3>
+      <p>Passively, locally. The search you ran at 11pm about your mother's memory. The hip forum you checked twice this week. chanio finds the patterns and adds them to your summary — without you filling out anything.</p>
       <span class="step-time">Background, always</span>
     </div>
     <div class="step-card">
       <div class="step-num">3</div>
-      <h3>Your profile is built</h3>
-      <p>chanio infers who you are — surgeon, caregiver, patient, family member — from the patterns in your browsing. Not from data you fill out.</p>
-      <span class="step-time">Builds over days</span>
+      <h3>Connected to your health record</h3>
+      <p>Link your actual medical records — labs, visits, medications — and chanio surfaces what matters. Your summary becomes clinically grounded, not just behavioral. Your physician can see exactly what you need them to see.</p>
+      <span class="step-time">One connected picture</span>
     </div>
     <div class="step-card">
       <div class="step-num">4</div>
-      <h3>Every site knows you</h3>
-      <p>Visit any HarnessHealth property and your chanio profile signals who you are. The right product, the right message, the right CTA — automatically.</p>
-      <span class="step-time">Instant, on every visit</span>
+      <h3>Shared with your loved ones</h3>
+      <p>Give family members access to what they need. Your adult children see your medications and upcoming appointments. Your caregiver sees your care preferences. Your proxy sees your advance directive. Everyone has what they need — nothing more.</p>
+      <span class="step-time">The right people see the right things</span>
     </div>
   </div>
 </div>
@@ -484,8 +637,8 @@ nav{
 <!-- WHAT CHANIO SEES -->
 <div class="section">
   <div class="kicker">The patterns chanio finds</div>
-  <h2 class="section-headline">Your browsing tells a health story<br>you have never read.</h2>
-  <p class="section-body">Most health-related browsing is research without action — you circle a topic, run the same searches, and never take the next step. chanio finds the signal in the noise.</p>
+  <h2 class="section-headline">You have been writing your health story<br>for years. chanio reads it.</h2>
+  <p class="section-body">Every search, every forum visit, every symptom you looked up at midnight — they add up to a picture of who you are and what you need. chanio is the first service that summarizes that picture back to you, and shares it only where you choose.</p>
 
   <div class="patterns-list">
     <div class="pattern-row">
@@ -522,8 +675,8 @@ nav{
 <div class="privacy-outer">
   <div class="privacy-inner">
     <div class="kicker">Privacy by design</div>
-    <h2 class="section-headline">Your data stays on your device.</h2>
-    <p class="section-body">chanio processes locally. No server sees your browsing history. No cloud storage. No data sold to advertisers. This is the opposite of how the internet works today. Platforms build profiles of you to sell. chanio builds a profile of you to give back to you.</p>
+    <h2 class="section-headline">You own it. You share it.<br>You revoke it.</h2>
+    <p class="section-body">chanio stores your records and browses for your patterns — but everything you store belongs to you, and you control exactly who sees it. Browsing is processed locally, on your device. Stored records are encrypted. Shared access is per-person, per-document, revocable anytime. This is the opposite of how every other health platform works: they own your data and share it with insurers. chanio gives it back to you.</p>
     <div class="privacy-badges">
       <span class="privacy-badge">
         <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -551,19 +704,18 @@ nav{
 
 <!-- TWO WAYS -->
 <div class="section">
-  <div class="kicker">Two ways to start</div>
-  <h2 class="section-headline">Extension or Claude Desktop —<br>both free.</h2>
+  <div class="kicker">Three ways in</div>
+  <h2 class="section-headline">Extension. Storage. Claude Desktop.<br>All free to start.</h2>
   <div class="two-ways-grid">
     <div class="way-card light">
-      <h3>Get the extension</h3>
-      <p>Install chanio in your browser. Passive intelligence builds over time. Every HarnessHealth site personalizes to you. Free — no account required to install.</p>
+      <h3>Get the browser extension</h3>
+      <p>chanio watches passively and builds your health story from how you browse. Install once — every site in the network personalizes to you. No account required.</p>
       <a href="#install" class="btn-primary-sm">Install for Chrome — free</a>
     </div>
     <div class="way-card dark">
-      <h3>Add to Claude Desktop</h3>
-      <p>Connect the chanio MCP connector to Claude Desktop. 36 tools — identity graph, interest compass, health pattern analysis — callable from any Claude conversation.</p>
-      <a href="https://harnesshealth.ai/connect" class="btn-outline-sm">Get the MCP connector</a>
-      <div class="mcp-badge">mapofyou-mcp-production.up.railway.app/mcp</div>
+      <h3>Start storing</h3>
+      <p>Drop in labs, visit notes, prescriptions, documents. chanio becomes the one place your health life lives — connected to your loved ones and your health record. Searchable by you and by AI.</p>
+      <a href="https://harnesshealth.ai/connect" class="btn-outline-sm">Open your chanio vault</a>
     </div>
   </div>
 </div>
@@ -572,38 +724,38 @@ nav{
 <div style="background:var(--surface-mid);border-top:1px solid var(--border);padding:80px 32px">
   <div style="max-width:900px;margin:0 auto">
     <div class="kicker">After you install</div>
-    <h2 class="section-headline">Here is what happens next.</h2>
-    <p class="section-body" style="margin-bottom:48px">No setup wizard. No survey. chanio starts building your profile immediately — and the network starts personalizing within your first few visits.</p>
+    <h2 class="section-headline">Your health consciousness<br>starts forming.</h2>
+    <p class="section-body" style="margin-bottom:48px">No setup wizard. No survey. chanio starts reading, storing, and connecting immediately. By week two you have something you have never had before — a complete picture of your health life, in one place, shared only with who you choose.</p>
 
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:var(--border);border-radius:16px;overflow:hidden">
 
       <div style="background:var(--surface);padding:28px 24px">
         <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--indigo-light);margin-bottom:12px">Day 1</div>
-        <div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:16px;color:#fff;margin-bottom:10px">Extension is active</div>
-        <p style="font-size:13px;color:var(--text-mid);line-height:1.65">chanio begins observing browsing patterns. No data leaves your device. A small icon appears in your toolbar — green means active, grey means paused.</p>
+        <div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:16px;color:#fff;margin-bottom:10px">The vault opens</div>
+        <p style="font-size:13px;color:var(--text-mid);line-height:1.65">chanio begins observing browsing patterns locally and your vault is ready to receive anything. Drop in a lab result. Forward an email from your doctor. chanio starts reading and filing.</p>
         <div style="margin-top:16px;padding:12px;background:var(--surface-mid);border-radius:8px;font-size:12px;color:var(--text-low)">
           <strong style="color:var(--text-mid);display:block;margin-bottom:4px">You see:</strong>
-          chanio icon in toolbar · no other change
+          chanio icon · empty vault · first save prompt
         </div>
       </div>
 
       <div style="background:var(--surface);padding:28px 24px">
         <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--indigo-light);margin-bottom:12px">Days 3–7</div>
-        <div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:16px;color:#fff;margin-bottom:10px">Network recognizes you</div>
-        <p style="font-size:13px;color:var(--text-mid);line-height:1.65">Visit surgeonvalue.com, co-op.care, or any HarnessHealth site. chanio signals your inferred profile. Each site shows the right entry point — no login required yet.</p>
+        <div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:16px;color:#fff;margin-bottom:10px">Your story starts connecting</div>
+        <p style="font-size:13px;color:var(--text-mid);line-height:1.65">chanio links what you stored to what you browsed and builds a coherent narrative — not a form, a living picture of you. Your health record, your concerns, your role in your family's care. A consciousness, not a profile.</p>
         <div style="margin-top:16px;padding:12px;background:var(--surface-mid);border-radius:8px;font-size:12px;color:var(--text-low)">
           <strong style="color:var(--text-mid);display:block;margin-bottom:4px">You see:</strong>
-          personalized headlines · matched CTAs · relevant pricing
+          your story · named patterns · who you are right now
         </div>
       </div>
 
       <div style="background:var(--surface);padding:28px 24px">
         <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--indigo-light);margin-bottom:12px">Week 2+</div>
-        <div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:16px;color:#fff;margin-bottom:10px">Weekly insight report</div>
-        <p style="font-size:13px;color:var(--text-mid);line-height:1.65">Your first weekly summary arrives in the chanio panel. Patterns you circled but never acted on. Health searches that shifted. One suggested next step for each.</p>
+        <div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:16px;color:#fff;margin-bottom:10px">Shared with the people you love</div>
+        <p style="font-size:13px;color:var(--text-mid);line-height:1.65">Invite your daughter to see your medication list. Share your advance directive with your care proxy. Connect your parent's record to yours. chanio becomes the family's shared health consciousness — the thing everyone needed but no one had.</p>
         <div style="margin-top:16px;padding:12px;background:var(--surface-mid);border-radius:8px;font-size:12px;color:var(--text-low)">
           <strong style="color:var(--text-mid);display:block;margin-bottom:4px">You see:</strong>
-          interest loops · health drift · one action per insight
+          family circle · shared records · permission controls
         </div>
       </div>
 
@@ -612,20 +764,522 @@ nav{
     <!-- Signed in state -->
     <div style="margin-top:20px;background:var(--indigo-dim);border:1px solid rgba(124,111,255,0.2);border-radius:14px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
       <div>
-        <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px">Once you sign in to HarnessHealth</div>
-        <p style="font-size:13px;color:var(--text-mid);line-height:1.5;max-width:500px">Your chanio profile merges with your account. Every HarnessHealth product unlocks your full context — your care history, your LMN status, your saved assessments — from a single login.</p>
+        <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px">chanio is bigger than MapOfYou. It is the whole story.</div>
+        <p style="font-size:13px;color:var(--text-mid);line-height:1.5;max-width:500px">MapOfYou maps your inner world — passions, values, identity. chanio maps your entire life: your health, your family, your records, your future. They are connected. Everything you discover in MapOfYou becomes part of the picture chanio holds for you.</p>
       </div>
       <a href="https://harnesshealth.ai/connect" style="flex-shrink:0;background:var(--indigo);color:#fff;padding:12px 22px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap">Connect — free</a>
     </div>
   </div>
 </div>
 
+<!-- FOR SITES SECTION -->
+<div id="for-sites" style="background:var(--surface-mid);padding:96px 32px;border-top:1px solid var(--border)">
+  <div style="max-width:960px;margin:0 auto">
+    <div class="kicker">For site builders</div>
+    <h2 class="section-headline">Add chanio to your site.<br>Your visitors arrive known.</h2>
+    <p class="section-body">chanio is infrastructure anyone can integrate. One script tag. Suddenly every visitor to your site arrives with a health identity — their role, their conditions, their care context, their family situation — pre-loaded, before they say a word. This is what it means to build on chanio.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:52px">
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px 24px">
+        <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--indigo-light);margin-bottom:16px">What you used to do</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <svg style="width:14px;height:14px;stroke:#f87171;fill:none;stroke-width:2;flex-shrink:0;margin-top:2px" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            <span style="font-size:13px;color:var(--text-mid)">Show every visitor the same homepage</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <svg style="width:14px;height:14px;stroke:#f87171;fill:none;stroke-width:2;flex-shrink:0;margin-top:2px" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            <span style="font-size:13px;color:var(--text-mid)">Ask them to create an account to personalize</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <svg style="width:14px;height:14px;stroke:#f87171;fill:none;stroke-width:2;flex-shrink:0;margin-top:2px" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            <span style="font-size:13px;color:var(--text-mid)">Fill out intake forms at every visit</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <svg style="width:14px;height:14px;stroke:#f87171;fill:none;stroke-width:2;flex-shrink:0;margin-top:2px" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            <span style="font-size:13px;color:var(--text-mid)">Build your own user research from scratch</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <svg style="width:14px;height:14px;stroke:#f87171;fill:none;stroke-width:2;flex-shrink:0;margin-top:2px" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            <span style="font-size:13px;color:var(--text-mid)">Guess what your anonymous visitors need</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,rgba(124,111,255,0.12),rgba(124,111,255,0.04));border:1px solid rgba(124,111,255,0.25);border-radius:16px;padding:28px 24px">
+        <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--indigo-light);margin-bottom:16px">With chanio</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <svg style="width:14px;height:14px;stroke:#4edea3;fill:none;stroke-width:2;flex-shrink:0;margin-top:2px" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <span style="font-size:13px;color:var(--text-mid)">Every visitor arrives with a health identity pre-loaded</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <svg style="width:14px;height:14px;stroke:#4edea3;fill:none;stroke-width:2;flex-shrink:0;margin-top:2px" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <span style="font-size:13px;color:var(--text-mid)">No account required for personalization</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <svg style="width:14px;height:14px;stroke:#4edea3;fill:none;stroke-width:2;flex-shrink:0;margin-top:2px" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <span style="font-size:13px;color:var(--text-mid)">Role, conditions, family context available on arrival</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <svg style="width:14px;height:14px;stroke:#4edea3;fill:none;stroke-width:2;flex-shrink:0;margin-top:2px" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <span style="font-size:13px;color:var(--text-mid)">Identity improves as the user's vault grows</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <svg style="width:14px;height:14px;stroke:#4edea3;fill:none;stroke-width:2;flex-shrink:0;margin-top:2px" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <span style="font-size:13px;color:var(--text-mid)">Community corpus improves your AI responses</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px 24px">
+        <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--indigo-light);margin-bottom:16px">Integration</div>
+        <div style="background:var(--ink);border-radius:10px;padding:16px;font-family:'Menlo','Monaco',monospace;font-size:11px;color:#4edea3;line-height:1.7;margin-bottom:16px">
+          &lt;script<br>
+          &nbsp;&nbsp;src="https://chanio.com/sdk.js"<br>
+          &nbsp;&nbsp;data-site="your-site-key"<br>
+          &gt;&lt;/script&gt;
+        </div>
+        <p style="font-size:12px;color:var(--text-low);line-height:1.6">One tag. chanio handles the rest — signal reading, synthesis, identity delivery. No data storage on your end. No HIPAA surface for you to manage.</p>
+        <a href="mailto:build@chanio.com" style="display:inline-block;margin-top:16px;font-size:13px;font-weight:700;color:var(--indigo-light);text-decoration:none">Request SDK access →</a>
+      </div>
+
+    </div>
+
+    <!-- Analogy row -->
+    <div style="margin-top:40px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+      <div style="padding:20px 22px;background:var(--surface);border:1px solid var(--border);border-radius:12px;text-align:center">
+        <div style="font-size:22px;margin-bottom:8px">💳</div>
+        <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">Stripe</div>
+        <div style="font-size:12px;color:var(--text-low)">Payment infrastructure.<br>One line. Payments work.</div>
+      </div>
+      <div style="padding:20px 22px;background:var(--surface);border:1px solid var(--border);border-radius:12px;text-align:center">
+        <div style="font-size:22px;margin-bottom:8px">🔐</div>
+        <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">Auth0</div>
+        <div style="font-size:12px;color:var(--text-low)">Identity infrastructure.<br>One line. Login works.</div>
+      </div>
+      <div style="padding:20px 22px;background:linear-gradient(135deg,rgba(124,111,255,0.15),rgba(124,111,255,0.04));border:1px solid rgba(124,111,255,0.3);border-radius:12px;text-align:center">
+        <div style="font-size:22px;margin-bottom:8px">🧠</div>
+        <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">chanio</div>
+        <div style="font-size:12px;color:var(--indigo-light)">Health identity infrastructure.<br>One line. Visitors known.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- AI ARCHITECTURE SECTION -->
+<div class="ai-outer" id="ai-stack">
+  <div class="ai-inner">
+    <div class="kicker">The intelligence stack</div>
+    <h2 class="section-headline">Six AI layers.<br>Running simultaneously.<br><em style="font-style:normal;color:var(--indigo-light)">Always.</em></h2>
+    <p class="section-body">Most health AI is reactive — you ask, it answers. chanio is different. Six distinct AI layers run in parallel, feeding each other, updating your consciousness without you doing anything. Here is exactly what each layer does, which model runs it, and what it outputs.</p>
+
+    <div class="ai-stack">
+
+      <!-- Layer 1 -->
+      <div class="ai-layer">
+        <div class="ai-layer-id">
+          <span class="ai-layer-num">Layer 1</span>
+          <span class="ai-layer-name">Edge Intelligence</span>
+          <span class="ai-layer-model">gemma-3-nano · local</span>
+        </div>
+        <div class="ai-layer-body">
+          <div class="ai-layer-trigger">
+            <div class="trigger-dot" style="background:#4edea3"></div>
+            <span style="color:#4edea3">Always running · every page load · zero latency</span>
+          </div>
+          <div class="ai-layer-desc">A small local model runs inside the extension on your device. Every page you visit is classified in under 50ms — health topic, emotional tenor, urgency signal, role signal (are you researching as a patient, a caregiver, a clinician?). No data leaves your device. The edge layer produces a continuous stream of tagged signals that feed every layer above it. It runs whether you are on a health site or not — the absence of health browsing is itself a signal.</div>
+        </div>
+        <div class="ai-layer-output">
+          <div class="output-label">Outputs</div>
+          <span class="output-tag">topic_tags[]</span>
+          <span class="output-tag">role_signal</span>
+          <span class="output-tag">urgency_flag</span>
+          <span class="output-tag">emotional_tenor</span>
+          <span class="output-tag">condition_signal</span>
+        </div>
+      </div>
+
+      <!-- Layer 2 -->
+      <div class="ai-layer">
+        <div class="ai-layer-id">
+          <span class="ai-layer-num">Layer 2</span>
+          <span class="ai-layer-name">Vault Intelligence</span>
+          <span class="ai-layer-model">claude-haiku · on upload</span>
+        </div>
+        <div class="ai-layer-body">
+          <div class="ai-layer-trigger">
+            <div class="trigger-dot" style="background:#7c6fff"></div>
+            <span style="color:var(--indigo-light)">Triggered · fires within seconds of any document save</span>
+          </div>
+          <div class="ai-layer-desc">Every document you store — a lab result, a prescription, a photo of your discharge summary, a note you typed after a doctor visit — gets read immediately by Claude Haiku. It extracts structured medical events: medications with dosages, diagnoses with ICD codes, lab values with reference ranges, physician names, dates of service. It builds a personal medical ontology from your unstructured documents. When a new lab result contradicts a previous one, it flags the drift. When a new medication interacts with an existing one, it surfaces the conflict. It never loses context from earlier documents.</div>
+        </div>
+        <div class="ai-layer-output">
+          <div class="output-label">Outputs</div>
+          <span class="output-tag">medication_list</span>
+          <span class="output-tag">condition_list</span>
+          <span class="output-tag">lab_trends[]</span>
+          <span class="output-tag">drift_flags[]</span>
+          <span class="output-tag">ontology_update</span>
+        </div>
+      </div>
+
+      <!-- Layer 3 -->
+      <div class="ai-layer">
+        <div class="ai-layer-id">
+          <span class="ai-layer-num">Layer 3</span>
+          <span class="ai-layer-name">Clinical Bridge</span>
+          <span class="ai-layer-model">fhir-parser + claude · on sync</span>
+        </div>
+        <div class="ai-layer-body">
+          <div class="ai-layer-trigger">
+            <div class="trigger-dot" style="background:#60a5fa"></div>
+            <span style="color:#60a5fa">On connection · then daily sync cadence</span>
+          </div>
+          <div class="ai-layer-desc">When you connect an EHR — Epic, Cerner, athenahealth, eClinicalWorks — the clinical bridge imports your structured record via FHIR R4. Problem list, medication list, active diagnoses, recent labs, upcoming appointments. Claude reads this clinical ground truth and cross-references it against the vault (Layer 2) and browsing signals (Layer 1). The critical output is the gap map: conditions you have been diagnosed with but have never browsed about. Medications on your list you have never looked up. Appointments you have rescheduled three times. The clinical bridge finds the distance between what your record says and what your behavior suggests.</div>
+        </div>
+        <div class="ai-layer-output">
+          <div class="output-label">Outputs</div>
+          <span class="output-tag">clinical_ground_truth</span>
+          <span class="output-tag">gap_map[]</span>
+          <span class="output-tag">adherence_signals</span>
+          <span class="output-tag">appointment_flags</span>
+        </div>
+      </div>
+
+      <!-- Layer 4 -->
+      <div class="ai-layer" style="border-color:rgba(124,111,255,0.3)">
+        <div class="ai-layer-id" style="background:rgba(124,111,255,0.08)">
+          <span class="ai-layer-num">Layer 4</span>
+          <span class="ai-layer-name">Synthesis Engine</span>
+          <span class="ai-layer-model">claude-sonnet · daily + trigger</span>
+        </div>
+        <div class="ai-layer-body" style="border-color:rgba(124,111,255,0.2)">
+          <div class="ai-layer-trigger">
+            <div class="trigger-dot" style="background:var(--indigo-light)"></div>
+            <span style="color:var(--indigo-light)">Daily synthesis · plus trigger on significant signal shift</span>
+          </div>
+          <div class="ai-layer-desc">The only layer that sees all other layers simultaneously. Claude Sonnet receives the full output of Layers 1–3 — the behavioral stream, the vault ontology, the clinical ground truth — and synthesizes a coherent, human-readable consciousness summary. It asks three questions: Who is this person right now? What are they circling without acting on? What do they need that they have not asked for yet? The output is not a medical record. It is a narrative — readable by you, shareable with loved ones on your terms, compressed into a privacy-preserving signal for the network. This layer runs every 24 hours and whenever any other layer produces a major signal shift (a new diagnosis, a dramatic browsing pattern change, a new medication added).</div>
+        </div>
+        <div class="ai-layer-output">
+          <div class="output-label">Outputs</div>
+          <span class="output-tag">consciousness_summary</span>
+          <span class="output-tag">circling_patterns[]</span>
+          <span class="output-tag">unmet_needs[]</span>
+          <span class="output-tag">network_signal</span>
+        </div>
+      </div>
+
+      <!-- Layer 5 -->
+      <div class="ai-layer">
+        <div class="ai-layer-id">
+          <span class="ai-layer-num">Layer 5</span>
+          <span class="ai-layer-name">Family Graph</span>
+          <span class="ai-layer-model">claude-extended · parallel</span>
+        </div>
+        <div class="ai-layer-body">
+          <div class="ai-layer-trigger">
+            <div class="trigger-dot" style="background:#f59e0b"></div>
+            <span style="color:#f59e0b">Always parallel · runs alongside all other layers</span>
+          </div>
+          <div class="ai-layer-desc">You are not one person in one role. You might be simultaneously a patient managing your own hip pain, a caregiver researching your mother's memory loss, and a surgeon evaluating shoulder repair techniques. The family graph layer maintains separate but linked consciousness summaries for every person in your circle — and crucially, it knows which role you are occupying right now, in this session, on this page. When you visit hippain.help, the family graph tells the network you are there as a patient. When you visit memoryloss.help fifteen minutes later, it tells the network you are there as a caregiver. The signal changes. The site adapts. Your context is always correct.</div>
+        </div>
+        <div class="ai-layer-output">
+          <div class="output-label">Outputs</div>
+          <span class="output-tag">active_role</span>
+          <span class="output-tag">care_circle[]</span>
+          <span class="output-tag">per_person_summary</span>
+          <span class="output-tag">role_signal</span>
+        </div>
+      </div>
+
+      <!-- Layer 6 -->
+      <div class="ai-layer">
+        <div class="ai-layer-id">
+          <span class="ai-layer-num">Layer 6</span>
+          <span class="ai-layer-name">Community Intelligence</span>
+          <span class="ai-layer-model">claude + embeddings · on event</span>
+        </div>
+        <div class="ai-layer-body">
+          <div class="ai-layer-trigger">
+            <div class="trigger-dot" style="background:#f87171"></div>
+            <span style="color:#f87171">On post · on read · background feed updates</span>
+          </div>
+          <div class="ai-layer-desc">When you share an experience in the community, Claude validates it against your vault data — confirming the experience is real before it enters the corpus. It then anonymizes through semantic transformation, not simple redaction: the experience is rewritten to preserve meaning while removing identity. The result is a verified-anonymous post that carries the weight of real experience without exposing who you are. When you read, the community layer uses your consciousness summary (Layer 4) to score the entire corpus for resonance — which experiences match where you are right now, what condition you are managing, what decision you are circling. Your feed is a mirror of your current state, not a popularity algorithm.</div>
+        </div>
+        <div class="ai-layer-output">
+          <div class="output-label">Outputs</div>
+          <span class="output-tag">verified_anonymous_post</span>
+          <span class="output-tag">resonance_feed[]</span>
+          <span class="output-tag">corpus_contribution</span>
+          <span class="output-tag">community_intelligence</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Synthesis Bridge -->
+    <div class="ai-synthesis-bridge">
+      <div class="synthesis-inputs">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-low);margin-bottom:12px">Layer 4 receives simultaneously</div>
+        <div class="synthesis-input-tag">browsing signal stream (L1)</div>
+        <div class="synthesis-input-tag">vault ontology + lab trends (L2)</div>
+        <div class="synthesis-input-tag">clinical ground truth + gap map (L3)</div>
+        <div class="synthesis-input-tag">active role + care circle (L5)</div>
+        <div class="synthesis-input-tag">community resonance patterns (L6)</div>
+      </div>
+      <div class="synthesis-arrow">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <span>synthesizes</span>
+      </div>
+      <div class="synthesis-output">
+        <div class="synthesis-output-label">Your consciousness summary</div>
+        <div class="synthesis-output-title">"Who you are right now"</div>
+        <div class="synthesis-output-desc">A coherent narrative built from 5 simultaneous data streams. Updated daily. Readable by you. Shareable on your terms. Compressed into a privacy-preserving signal that fires to 14 sites in the network the moment you arrive.</div>
+      </div>
+    </div>
+
+    <!-- Network signal bar -->
+    <div class="signal-bar">
+      <span class="signal-label">Network signal</span>
+      <div class="signal-tags">
+        <span class="signal-tag">role: caregiver</span>
+        <span class="signal-tag">condition: hip_pain</span>
+        <span class="signal-tag">context: parent_care</span>
+        <span class="signal-tag">stage: researching</span>
+        <span class="signal-tag">gap: hsa_unexplored</span>
+        <span class="signal-tag">urgency: moderate</span>
+      </div>
+      <span class="signal-dest">→ fires to 14 sites on arrival</span>
+    </div>
+
+    <p style="font-size:13px;color:var(--text-low);margin-top:20px;line-height:1.65;max-width:700px">The signal is not your data. It is not your identity. It is a compressed fingerprint of your synthesis output — enough for each site to show you the right thing, not enough to reconstruct who you are. You can pause, clear, or revoke it at any time.</p>
+
+  </div>
+</div>
+
+<!-- COMMUNITY SECTION -->
+<div class="community-outer">
+  <div class="community-inner">
+    <div class="kicker">The community layer</div>
+    <h2 class="section-headline">Your story. Their experience.<br>One living feed.</h2>
+    <p class="section-body">chanio has a Reddit-style community built in — organized by condition, life stage, and care role. Your consciousness feeds it anonymously. Their experiences feed yours. This is how health knowledge actually spreads: person to person, experience to experience.</p>
+
+    <div class="feed-grid">
+
+      <!-- Left: subreddit-style channels -->
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-low);margin-bottom:14px;padding-left:4px">Channels</div>
+        <div class="subreddit-list">
+          <div class="subreddit-item active">
+            <div class="subreddit-dot" style="background:#7c6fff"></div>
+            <span class="subreddit-name">c/hip-pain</span>
+            <span class="subreddit-count">2.4k</span>
+          </div>
+          <div class="subreddit-item">
+            <div class="subreddit-dot" style="background:#4edea3"></div>
+            <span class="subreddit-name">c/caring-for-parents</span>
+            <span class="subreddit-count">5.1k</span>
+          </div>
+          <div class="subreddit-item">
+            <div class="subreddit-dot" style="background:#60a5fa"></div>
+            <span class="subreddit-name">c/memory-loss</span>
+            <span class="subreddit-count">3.8k</span>
+          </div>
+          <div class="subreddit-item">
+            <div class="subreddit-dot" style="background:#f59e0b"></div>
+            <span class="subreddit-name">c/hsa-fsa-savings</span>
+            <span class="subreddit-count">1.9k</span>
+          </div>
+          <div class="subreddit-item">
+            <div class="subreddit-dot" style="background:#f87171"></div>
+            <span class="subreddit-name">c/heart-health</span>
+            <span class="subreddit-count">4.2k</span>
+          </div>
+          <div class="subreddit-item">
+            <div class="subreddit-dot" style="background:#a78bfa"></div>
+            <span class="subreddit-name">c/aging-in-place</span>
+            <span class="subreddit-count">6.7k</span>
+          </div>
+          <div class="subreddit-item">
+            <div class="subreddit-dot" style="background:#34d399"></div>
+            <span class="subreddit-name">c/pregnancy-care</span>
+            <span class="subreddit-count">2.1k</span>
+          </div>
+          <div class="subreddit-item">
+            <div class="subreddit-dot" style="background:#fb923c"></div>
+            <span class="subreddit-name">c/fall-prevention</span>
+            <span class="subreddit-count">1.3k</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: post feed -->
+      <div class="post-feed">
+
+        <div class="post-card">
+          <div class="post-meta">
+            <div class="post-avatar">JM</div>
+            <span class="post-author"><strong>j_m_boulder</strong> · 3h ago</span>
+            <span class="post-tag">c/hip-pain</span>
+          </div>
+          <div class="post-title">Waited 8 months to call a surgeon. Wish I had called at week 6.</div>
+          <div class="post-body">My chanio summary showed I'd been circling hip pain forums for almost a year without taking any action. Finally booked through SurgeonValue last month. The consult took 20 minutes. I had my diagnosis in 48 hours. The thing that held me back was not knowing what it would cost. That's the information I needed and couldn't find.</div>
+          <div class="post-footer">
+            <span class="post-vote"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg> 47</span>
+            <span class="post-vote"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> 12</span>
+            <span class="post-chanio"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg> chanio-verified experience</span>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="post-meta">
+            <div class="post-avatar">SK</div>
+            <span class="post-author"><strong>s_k_denver</strong> · 11h ago</span>
+            <span class="post-tag">c/caring-for-parents</span>
+          </div>
+          <div class="post-title">The LMN thing is real. $936 back in our pocket this year.</div>
+          <div class="post-body">My chanio vault had my dad's care notes going back 14 months. The physician used them to generate an LMN in about 10 minutes. Sent to our HSA provider. Three weeks later the reimbursements started coming. I had no idea this was possible until I found this channel.</div>
+          <div class="post-footer">
+            <span class="post-vote"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg> 89</span>
+            <span class="post-vote"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> 23</span>
+            <span class="post-chanio"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg> chanio-verified experience</span>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="post-meta">
+            <div class="post-avatar">RP</div>
+            <span class="post-author"><strong>r_p_chicago</strong> · 1d ago</span>
+            <span class="post-tag">c/memory-loss</span>
+          </div>
+          <div class="post-title">Shared my mom's chanio vault with her neurologist. Changed the whole conversation.</div>
+          <div class="post-body">Instead of a 7-minute appointment with a paper intake form, her neurologist had 18 months of patterns — her sleep searches, the caregiver forums I'd visited, the symptoms I'd noted in the vault. He said it was the most complete picture he'd seen from a family caregiver. We walked out with an actual plan.</div>
+          <div class="post-footer">
+            <span class="post-vote"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg> 134</span>
+            <span class="post-vote"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> 41</span>
+            <span class="post-chanio"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg> chanio-verified experience</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="community-note">
+      <strong>Posts are anonymous by default.</strong> chanio verifies that experiences are real — drawn from actual vault data and browsing history — but never reveals who you are. You choose what to share and how much of yourself travels with the post. The community learns from your experience. You stay private.
+    </div>
+  </div>
+</div>
+
+<!-- ARC SECTION -->
+<div style="background:var(--ink);padding:120px 32px;border-top:1px solid var(--border)">
+  <div style="max-width:760px;margin:0 auto;text-align:center">
+
+    <div class="kicker">The whole arc</div>
+    <h2 style="font-family:'Manrope',sans-serif;font-weight:900;font-size:clamp(32px,5vw,56px);line-height:1.1;letter-spacing:-0.03em;color:#fff;margin-bottom:28px">
+      Consciousness to death.<br>
+      <em style="font-style:normal;color:var(--indigo-light)">It's all worth keeping.</em>
+    </h2>
+    <p style="font-size:17px;color:rgba(232,232,240,0.55);line-height:1.75;max-width:560px;margin:0 auto 64px">Every other health product picks a slice of your life. A condition. An episode. A benefit. chanio holds the whole arc — from first consciousness to last breath — and optimizes every moment in between.</p>
+
+    <!-- Timeline -->
+    <div style="display:flex;flex-direction:column;gap:0;max-width:600px;margin:0 auto 64px;text-align:left">
+
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:0;align-items:stretch">
+        <div style="display:flex;flex-direction:column;align-items:center">
+          <div style="width:12px;height:12px;border-radius:50%;background:var(--indigo);flex-shrink:0;margin-top:4px"></div>
+          <div style="width:1px;flex:1;background:linear-gradient(to bottom,var(--indigo),rgba(124,111,255,0.2));margin-top:6px"></div>
+        </div>
+        <div style="padding:0 0 36px 20px">
+          <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--indigo-light);margin-bottom:6px">Beginning</div>
+          <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:6px">First records</div>
+          <div style="font-size:13px;color:var(--text-mid);line-height:1.65">Birth records. Childhood vaccines. Early diagnoses. The health story that started before you were old enough to tell it yourself. chanio preserves it and makes it available to every clinician who ever needs to know where you started.</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:0;align-items:stretch">
+        <div style="display:flex;flex-direction:column;align-items:center">
+          <div style="width:12px;height:12px;border-radius:50%;background:var(--indigo);flex-shrink:0;margin-top:4px"></div>
+          <div style="width:1px;flex:1;background:linear-gradient(to bottom,rgba(124,111,255,0.4),rgba(124,111,255,0.2));margin-top:6px"></div>
+        </div>
+        <div style="padding:0 0 36px 20px">
+          <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--indigo-light);margin-bottom:6px">Identity</div>
+          <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:6px">Who you are</div>
+          <div style="font-size:13px;color:var(--text-mid);line-height:1.65">Passions, values, what lights you up — the MapOfYou layer. Your psychological profile. Your ikigai. The inner landscape that shapes every health decision you make. chanio connects inner identity to outer health reality.</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:0;align-items:stretch">
+        <div style="display:flex;flex-direction:column;align-items:center">
+          <div style="width:12px;height:12px;border-radius:50%;background:var(--indigo);flex-shrink:0;margin-top:4px"></div>
+          <div style="width:1px;flex:1;background:linear-gradient(to bottom,rgba(124,111,255,0.3),rgba(124,111,255,0.2));margin-top:6px"></div>
+        </div>
+        <div style="padding:0 0 36px 20px">
+          <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--indigo-light);margin-bottom:6px">Adult life</div>
+          <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:6px">Conditions, labs, decisions</div>
+          <div style="font-size:13px;color:var(--text-mid);line-height:1.65">The long middle — diagnoses you manage, medications you take, symptoms you research at 11pm, care decisions you circle for months before acting. The vault holds it. The browsing layer reads it. The synthesis engine makes sense of all of it together.</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:0;align-items:stretch">
+        <div style="display:flex;flex-direction:column;align-items:center">
+          <div style="width:12px;height:12px;border-radius:50%;background:var(--indigo);flex-shrink:0;margin-top:4px"></div>
+          <div style="width:1px;flex:1;background:linear-gradient(to bottom,rgba(124,111,255,0.2),rgba(124,111,255,0.1));margin-top:6px"></div>
+        </div>
+        <div style="padding:0 0 36px 20px">
+          <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--indigo-light);margin-bottom:6px">Caregiving</div>
+          <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:6px">Their story in your hands</div>
+          <div style="font-size:13px;color:var(--text-mid);line-height:1.65">The years when you carry someone else's health story alongside your own. Your aging parent. Your child with a chronic condition. The family graph layer maintains their consciousness in parallel with yours — so you never lose the thread, and neither does their care team.</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:0;align-items:stretch">
+        <div style="display:flex;flex-direction:column;align-items:center">
+          <div style="width:12px;height:12px;border-radius:50%;background:var(--indigo);flex-shrink:0;margin-top:4px"></div>
+          <div style="width:1px;flex:1;background:linear-gradient(to bottom,rgba(124,111,255,0.1),transparent);margin-top:6px"></div>
+        </div>
+        <div style="padding:0 0 36px 20px">
+          <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--indigo-light);margin-bottom:6px">End of life</div>
+          <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:6px">Your wishes. Written. Held.</div>
+          <div style="font-size:13px;color:var(--text-mid);line-height:1.65">Advance directives. Care preferences. Who speaks for you when you can't. The CareGoals layer lives inside chanio — your values map, your proxy designation, your end-of-life instructions, readable by the people and systems that need them most.</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:0">
+        <div style="display:flex;flex-direction:column;align-items:center">
+          <div style="width:12px;height:12px;border-radius:50%;background:rgba(124,111,255,0.4);border:1px solid var(--indigo);flex-shrink:0;margin-top:4px"></div>
+        </div>
+        <div style="padding:0 0 0 20px">
+          <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:rgba(124,111,255,0.5);margin-bottom:6px">Legacy</div>
+          <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.4);margin-bottom:6px">What you leave</div>
+          <div style="font-size:13px;color:var(--text-low);line-height:1.65">Your health story doesn't end. It becomes the starting record for the people who carry your genes. Your children begin with context. The arc continues.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin:0 auto;max-width:600px;padding-top:16px">
+      <p style="font-size:22px;color:rgba(232,232,240,0.9);line-height:1.6;font-family:'Manrope',sans-serif;font-weight:700;margin-bottom:12px">"We're all just walking each other home."</p>
+      <p style="font-size:13px;color:rgba(232,232,240,0.3);margin-bottom:48px">— Ram Dass</p>
+
+      <p style="font-size:17px;color:rgba(232,232,240,0.55);line-height:1.8;max-width:520px;margin:0 auto 48px">Life is a celebration. The whole arc — first breath to last — is worth being fully present for. chanio exists for the moments when you can't get there on your own. When the diagnosis clouds everything. When the caregiving weight is too heavy to carry alone. When you can't see the path forward.</p>
+
+      <div style="background:rgba(124,111,255,0.08);border:1px solid rgba(124,111,255,0.2);border-radius:16px;padding:32px 36px;max-width:480px;margin:0 auto">
+        <p style="font-size:15px;color:rgba(232,232,240,0.7);line-height:1.75;margin-bottom:0">That's what the network is for. Fourteen sites. Six AI layers. A community of people who have been where you are. Your family, connected. Your record, held. Your story, known.<br><br><strong style="color:#fff">If you can't get there — let us help you.</strong></p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- INSTALL SECTION -->
 <div id="install" style="background:var(--ink);border-top:1px solid var(--border);padding:80px 32px">
   <div style="max-width:680px;margin:0 auto;text-align:center">
-    <div class="kicker">Get the extension</div>
-    <h2 class="section-headline">30 seconds to install.<br>No account required.</h2>
-    <p class="section-body" style="margin:0 auto 40px">chanio is free. No personal information is collected at install. Your profile is built on your device and stays there.</p>
+    <div class="kicker">Start now</div>
+    <h2 class="section-headline">Your health consciousness<br>is waiting for you.</h2>
+    <p class="section-body" style="margin:0 auto 40px">Free to install. Nothing to fill out. chanio starts reading, storing, and connecting the moment it opens. This is the place your health life has always needed to live.</p>
 
     <!-- Chrome Web Store button -->
     <div style="margin-bottom:24px">
@@ -1215,28 +1869,15 @@ nav{
 })();
 </script>
 
-<!-- co-op.care ecosystem footer -->
-<footer style="background:#1B2A4A;padding:48px 24px 32px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-<div style="max-width:800px;margin:0 auto;">
-<div style="text-align:center;margin-bottom:24px;">
-<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:20px;margin-bottom:16px;">
-<a href="https://co-op.care" style="font-size:13px;color:rgba(255,255,255,0.35);text-decoration:none;">co-op.care</a>
-<a href="https://surgeonvalue.com" style="font-size:13px;color:rgba(255,255,255,0.35);text-decoration:none;">SurgeonValue</a>
-<a href="https://caregoals.com" style="font-size:13px;color:rgba(255,255,255,0.35);text-decoration:none;">CareGoals</a>
-<a href="https://comfortcard.org" style="font-size:13px;color:rgba(255,255,255,0.35);text-decoration:none;">ComfortCard</a>
-<a href="https://clinicalswipe.com" style="font-size:13px;color:rgba(255,255,255,0.35);text-decoration:none;">ClinicalSwipe</a>
-<a href="https://solvinghealth.com" style="font-size:13px;color:rgba(255,255,255,0.35);text-decoration:none;">SolvingHealth</a>
-</div>
-<p style="font-size:14px;color:rgba(255,255,255,0.5);font-style:italic;margin:0 0 20px;">The health system that works for you — instead of you working for it.</p>
-<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:24px;">
-<a href="https://comfortcard.org" style="font-size:12px;font-weight:600;color:#fff;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);padding:8px 20px;border-radius:100px;text-decoration:none;">Get a ComfortCard</a>
-<a href="https://co-op.care" style="font-size:12px;font-weight:600;color:#fff;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);padding:8px 20px;border-radius:100px;text-decoration:none;">Start a co-op near you</a>
-<a href="https://solvinghealth.com/afhm" style="font-size:12px;font-weight:600;color:#fff;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);padding:8px 20px;border-radius:100px;text-decoration:none;">For Health Systems</a>
-</div>
-</div>
-<p style="text-align:center;font-size:11px;color:rgba(255,255,255,0.15);margin:0;">Physician-governed AI. HIPAA compliant. SolvingHealth LLC.</p>
-</div>
-</footer>
-
+<!-- chanio anchor — sets first-party cookie on first visit -->
+<script>
+(function(){
+  // Ping to set chanio_id cookie if not already set.
+  // This is the "click once and we know you" anchor.
+  // No personal data sent. Just a UUID assigned to this browser.
+  fetch('/api/ping', { credentials: 'include' }).catch(function(){});
+})();
+</script>
+<script src="https://harnesshealth.ai/harness.js"></script>
 </body>
 </html>
