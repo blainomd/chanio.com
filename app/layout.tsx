@@ -33,7 +33,7 @@ export default function RootLayout({
       <body>
         {children}
         <Script
-          src="https://solvinghealth.com/footer.js"
+          src="https://harnesshealth.ai/footer.js"
           data-brand="solvinghealth"
           data-theme="dark"
           strategy="lazyOnload"
