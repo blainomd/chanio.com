@@ -48,23 +48,26 @@ export default function Nav() {
           className="desktop-nav"
         >
           {[
-            ["How it works", "/how-it-works"],
-            ["Network", "/network"],
-            ["Pricing", "/pricing"],
-            ["For sites", "/for-sites"],
-          ].map(([label, href]) => (
+            ["Surf", "/surf", true],
+            ["How it works", "/how-it-works", false],
+            ["Network", "/network", false],
+            ["Pricing", "/pricing", false],
+            ["For sites", "/for-sites", false],
+          ].map(([label, href, highlight]) => (
             <Link
-              key={href}
-              href={href}
+              key={href as string}
+              href={href as string}
               style={{
-                color: "#8899A6",
+                color: highlight ? "#6B4CF0" : "#8899A6",
                 textDecoration: "none",
                 fontSize: 14,
-                fontWeight: 500,
+                fontWeight: highlight ? 700 : 500,
                 transition: "color 0.2s",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#E8EDF2")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#8899A6")}
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = highlight ? "#6B4CF0" : "#8899A6")
+              }
             >
               {label}
             </Link>
@@ -126,21 +129,22 @@ export default function Nav() {
           }}
         >
           {[
-            ["How it works", "/how-it-works"],
-            ["Network", "/network"],
-            ["Pricing", "/pricing"],
-            ["For sites", "/for-sites"],
-          ].map(([label, href]) => (
+            ["Surf", "/surf", true],
+            ["How it works", "/how-it-works", false],
+            ["Network", "/network", false],
+            ["Pricing", "/pricing", false],
+            ["For sites", "/for-sites", false],
+          ].map(([label, href, highlight]) => (
             <Link
-              key={href}
-              href={href}
+              key={href as string}
+              href={href as string}
               onClick={() => setOpen(false)}
               style={{
                 display: "block",
-                color: "#8899A6",
+                color: highlight ? "#6B4CF0" : "#8899A6",
                 textDecoration: "none",
                 fontSize: 16,
-                fontWeight: 500,
+                fontWeight: highlight ? 700 : 500,
                 padding: "12px 0",
                 borderBottom: "1px solid rgba(255,255,255,0.04)",
               }}

@@ -149,7 +149,7 @@ export default function HomePage() {
             id="get-chanio"
           >
             <a
-              href="#"
+              href="/install"
               style={{
                 background: "#0D7377",
                 color: "white",
@@ -170,7 +170,7 @@ export default function HomePage() {
               Add to Chrome — free
             </a>
             <a
-              href="/how-it-works"
+              href="/surf"
               style={{
                 background: "transparent",
                 color: "#E8EDF2",
@@ -179,10 +179,16 @@ export default function HomePage() {
                 textDecoration: "none",
                 fontSize: 16,
                 fontWeight: 600,
-                border: "1.5px solid rgba(255,255,255,0.15)",
+                border: "1.5px solid rgba(107,76,240,0.4)",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 10,
               }}
             >
-              See how it works
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M2 13c2-3 4-3 6 0s4 3 6 0 2-3 2-3" stroke="#6B4CF0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Surf what&apos;s live now
             </a>
           </div>
         </section>
@@ -567,7 +573,7 @@ export default function HomePage() {
                 ))}
               </ul>
               <a
-                href="#"
+                href="/install"
                 style={{
                   display: "block",
                   textAlign: "center",
@@ -630,7 +636,7 @@ export default function HomePage() {
                 ))}
               </ul>
               <a
-                href="#"
+                href="/install"
                 style={{
                   display: "block",
                   textAlign: "center",
@@ -677,7 +683,7 @@ export default function HomePage() {
             Join the early access list. Free to start.
           </p>
           <a
-            href="#get-chanio"
+            href="/install"
             style={{
               background: "#0D7377",
               color: "white",
