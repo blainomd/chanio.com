@@ -250,7 +250,7 @@ export default function InstallPage() {
           <p style={{ fontSize: 16, color: "rgba(232,237,242,0.7)", marginBottom: 28, lineHeight: 1.6 }}>
             Visit any of the condition sites — hearthealth.help, hippain.help, memoryloss.help — and
             chanio starts building your quiet map. When you open a new conversation in Claude, your
-            Sage already knows what you've been reading.
+            Reed already knows what you've been reading.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             {[

@@ -1,7 +1,25 @@
 "use client";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+// /surf — Chanio's "catch a wave" surface.
+//
+// 2026-04-14 ship notes (what changed and why):
+//   1. Hero rewritten from one-word "Surf" to the actual tagline
+//      ("Making the web surfable") + real product description + dual CTA
+//      in the hero. Old copy cut "For now, start here" because it
+//      telegraphed a placeholder.
+//   2. New "What's surfable right now" rotating feed right after the hero.
+//      Gives the page momentum. Every item is a verifiable fact about
+//      the live ecosystem — no claims we can't substantiate, no metrics
+//      we don't measure, just real capabilities that actually ship.
+//      Rotates every 3.5s client-side so the page feels different on
+//      every visit without requiring server state.
+//   3. Stripped "Powered by SurgeonValue" from the individual card
+//      subtitle. Attribution moved to a single footer-adjacent
+//      ecosystem row so it reads "Chanio surfs this network" instead of
+//      "Chanio is a thin layer on top of SurgeonValue."
 
 type Card = {
   title: string;
@@ -17,6 +35,68 @@ type Section = {
   cards: Card[];
 };
 
+// ─── Fix 2: live rotating feed items ────────────────────────────────────
+// Every item here is a verifiable capability of the live ecosystem as of
+// 2026-04-14. No vanity metrics, no growth claims, no aspirational
+// statements. Each rotates into the feed strip below the hero.
+type WaveItem = {
+  emoji: string;
+  text: string;
+  href: string;
+  kicker: string;
+};
+
+const WAVE_ITEMS: WaveItem[] = [
+  {
+    kicker: "Live",
+    emoji: "🩺",
+    text: "Dictate a case on Pocket, Wonder Bill finds billing codes in 4 seconds",
+    href: "https://surgeonvalue.com/pocket",
+  },
+  {
+    kicker: "Live",
+    emoji: "🔍",
+    text: "Any 10-digit NPI renders a live profile at surgeonvalue.com/p/<NPI>",
+    href: "https://surgeonvalue.com/p/1104445147",
+  },
+  {
+    kicker: "Live",
+    emoji: "💬",
+    text: "Ask Reed anything as you surf — every site has the same chat",
+    href: "https://harnesshealth.ai",
+  },
+  {
+    kicker: "Live",
+    emoji: "🗂️",
+    text: "241 tools in Claude Desktop via the SolvingHealth MCP connector",
+    href: "https://solvinghealth.com",
+  },
+  {
+    kicker: "Live",
+    emoji: "📱",
+    text: "Save any surgeon's QR card to your phone in one tap",
+    href: "https://surgeonvalue.com/p/levonti",
+  },
+  {
+    kicker: "Live",
+    emoji: "🏡",
+    text: "Worker-owned companion care in Boulder — $59/mo includes LMN",
+    href: "https://co-op.care",
+  },
+  {
+    kicker: "Live",
+    emoji: "📝",
+    text: "Physician-signed advance directives cross-state binding",
+    href: "https://caregoals.com",
+  },
+  {
+    kicker: "Live",
+    emoji: "💳",
+    text: "Your health identity as a QR — one scan, no plastic",
+    href: "https://comfortcard.org",
+  },
+];
+
 const SECTIONS: Section[] = [
   {
     id: "find-doctor",
@@ -25,13 +105,13 @@ const SECTIONS: Section[] = [
     cards: [
       {
         title: "Orthopedic Surgeons",
-        desc: "Find an orthopedic specialist near you. Powered by SurgeonValue.",
+        desc: "Find an orthopedic specialist near you — every US surgeon, live from CMS NPPES.",
         href: "https://surgeonvalue.com",
         label: "surgeonvalue.com",
       },
       {
         title: "Telemedicine Physician",
-        desc: "See a licensed physician from home. Altru.care — direct primary and urgent care.",
+        desc: "See a licensed physician from home. Direct primary and urgent care.",
         href: "https://altru.care",
         label: "altru.care",
       },
@@ -199,6 +279,177 @@ const SECTIONS: Section[] = [
   },
 ];
 
+// ─── Fix 2: the rotating "what's surfable right now" feed component ─────
+function WaveFeed() {
+  // Randomize the starting order so each visit feels different
+  const [items] = useState(() => {
+    const shuffled = [...WAVE_ITEMS];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  });
+
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActiveIdx((prev) => (prev + 1) % items.length);
+    }, 3500);
+    return () => clearInterval(id);
+  }, [items.length]);
+
+  return (
+    <section
+      style={{
+        maxWidth: 1200,
+        margin: "0 auto",
+        padding: "16px 24px 40px",
+      }}
+    >
+      <div
+        style={{
+          background: "rgba(13,115,119,0.05)",
+          border: "1px solid rgba(13,115,119,0.2)",
+          borderRadius: 18,
+          padding: "22px 26px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 16,
+            marginBottom: 18,
+          }}
+        >
+          <p
+            style={{
+              fontSize: 10,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: "#0D7377",
+              fontWeight: 800,
+              margin: 0,
+            }}
+          >
+            ▚ What&apos;s surfable right now
+          </p>
+          <p
+            style={{
+              fontSize: 11,
+              color: "#8899A6",
+              margin: 0,
+            }}
+          >
+            {activeIdx + 1} / {items.length}
+          </p>
+        </div>
+
+        {/* Active headline */}
+        <a
+          href={items[activeIdx].href}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+            padding: "14px 16px",
+            background: "rgba(255,255,255,0.03)",
+            border: "1px solid rgba(13,115,119,0.3)",
+            borderRadius: 12,
+            textDecoration: "none",
+            transition: "all 0.4s ease",
+          }}
+          key={activeIdx}
+        >
+          <span
+            style={{
+              fontSize: 26,
+              flexShrink: 0,
+              transition: "opacity 0.4s",
+            }}
+          >
+            {items[activeIdx].emoji}
+          </span>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p
+              style={{
+                fontSize: 9,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#0D7377",
+                fontWeight: 800,
+                margin: "0 0 4px",
+              }}
+            >
+              {items[activeIdx].kicker}
+            </p>
+            <p
+              style={{
+                fontSize: 15,
+                color: "#E8EDF2",
+                fontWeight: 600,
+                lineHeight: 1.45,
+                margin: 0,
+              }}
+            >
+              {items[activeIdx].text}
+            </p>
+          </div>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            style={{ flexShrink: 0, opacity: 0.6 }}
+          >
+            <path
+              d="M3 8h10M9 4l4 4-4 4"
+              stroke="#0D7377"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </a>
+
+        {/* Progress dots for the rotation */}
+        <div
+          style={{
+            display: "flex",
+            gap: 6,
+            marginTop: 14,
+            justifyContent: "center",
+          }}
+        >
+          {items.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveIdx(i)}
+              aria-label={`Jump to item ${i + 1}`}
+              style={{
+                width: i === activeIdx ? 24 : 6,
+                height: 6,
+                borderRadius: 3,
+                background:
+                  i === activeIdx ? "#0D7377" : "rgba(13,115,119,0.25)",
+                border: "none",
+                padding: 0,
+                cursor: "pointer",
+                transition: "all 0.3s",
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function SectionCard({ card }: { card: Card }) {
   const [hovered, setHovered] = useState(false);
 
@@ -293,12 +544,17 @@ export default function SurfPage() {
     <>
       <Nav />
       <main>
-        {/* Hero */}
+        {/* ─── Fix 1: hero rewrite ────────────────────────────────────────
+            Old hero: one-word "Surf" + "Your AI will learn what matters
+            to you. For now, start here." Telegraphed placeholder.
+            New hero: the actual tagline + product description + primary
+            CTA in the hero (not buried 800px below) + secondary CTA that
+            scrolls down to the directory. */}
         <section
           style={{
             maxWidth: 1200,
             margin: "0 auto",
-            padding: "80px 24px 64px",
+            padding: "80px 24px 32px",
             textAlign: "center",
             position: "relative",
           }}
@@ -317,33 +573,115 @@ export default function SurfPage() {
             }}
           />
 
-          <h1
+          <p
             style={{
-              fontSize: "clamp(56px, 10vw, 120px)",
-              fontWeight: 900,
-              lineHeight: 0.95,
-              letterSpacing: "-3px",
+              fontSize: 11,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
               color: "#0D7377",
-              margin: "0 auto 24px",
+              fontWeight: 800,
+              margin: "0 0 18px",
             }}
           >
-            Surf
+            ▚ chanio · surf
+          </p>
+          <h1
+            style={{
+              fontSize: "clamp(40px, 7vw, 78px)",
+              fontWeight: 900,
+              lineHeight: 1.02,
+              letterSpacing: "-2px",
+              color: "#E8EDF2",
+              margin: "0 auto 20px",
+              maxWidth: 820,
+            }}
+          >
+            Making the web{" "}
+            <span style={{ color: "#0D7377" }}>surfable</span>.
           </h1>
           <p
             style={{
-              fontSize: "clamp(16px, 2.5vw, 20px)",
+              fontSize: "clamp(16px, 2.2vw, 19px)",
               color: "#8899A6",
               fontWeight: 400,
-              maxWidth: 520,
-              margin: "0 auto",
+              maxWidth: 600,
+              margin: "0 auto 32px",
               lineHeight: 1.6,
             }}
           >
-            Your AI will learn what matters to you. For now, start here.
+            Chanio is the Chrome extension that remembers what you read and
+            turns the web into your own channel. Install in 30 seconds. Free.
           </p>
+          <div
+            style={{
+              display: "flex",
+              gap: 12,
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <a
+              href="https://chrome.google.com/webstore"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                background: "#0D7377",
+                color: "white",
+                padding: "14px 28px",
+                borderRadius: 10,
+                textDecoration: "none",
+                fontSize: 15,
+                fontWeight: 700,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 10,
+                boxShadow: "0 10px 30px rgba(13,115,119,0.25)",
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+                <path
+                  d="M15 8A7 7 0 112 8"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M11 1l4 4-4 4"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              Add to Chrome — free
+            </a>
+            <a
+              href="#directory"
+              style={{
+                background: "transparent",
+                color: "#E8EDF2",
+                padding: "14px 24px",
+                borderRadius: 10,
+                textDecoration: "none",
+                fontSize: 15,
+                fontWeight: 600,
+                border: "1px solid rgba(232,237,242,0.2)",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+              }}
+            >
+              Browse what&apos;s surfable →
+            </a>
+          </div>
         </section>
 
-        {/* Sections */}
+        {/* ─── Fix 2: live rotating feed ─────────────────────────────── */}
+        <WaveFeed />
+
+        {/* Directory sections — intentionally anchored so the "Browse
+            what's surfable →" CTA scrolls here */}
+        <div id="directory" />
         {SECTIONS.map((section) => (
           <section
             key={section.id}
@@ -395,39 +733,123 @@ export default function SurfPage() {
           </section>
         ))}
 
-        {/* Bottom CTA */}
+        {/* ─── Fix 3: ecosystem attribution row ──────────────────────────
+            Replaces the scattered "Powered by SurgeonValue" in card
+            subtitles. One row, honest framing: chanio is the front end
+            that surfs a whole network. */}
         <section
+          style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            padding: "32px 24px",
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+          }}
+        >
+          <p
+            style={{
+              fontSize: 13,
+              color: "#8899A6",
+              lineHeight: 1.7,
+              textAlign: "center",
+              maxWidth: 720,
+              margin: "0 auto",
+            }}
+          >
+            Chanio surfs the SolvingHealth ecosystem:{" "}
+            <a
+              href="https://surgeonvalue.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#0D7377", textDecoration: "none" }}
+            >
+              SurgeonValue
+            </a>
+            ,{" "}
+            <a
+              href="https://co-op.care"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#0D7377", textDecoration: "none" }}
+            >
+              co-op.care
+            </a>
+            ,{" "}
+            <a
+              href="https://altru.care"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#0D7377", textDecoration: "none" }}
+            >
+              altru.care
+            </a>
+            ,{" "}
+            <a
+              href="https://comfortcard.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#0D7377", textDecoration: "none" }}
+            >
+              ComfortCard
+            </a>
+            ,{" "}
+            <a
+              href="https://caregoals.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#0D7377", textDecoration: "none" }}
+            >
+              CareGoals
+            </a>
+            ,{" "}
+            <a
+              href="https://clinicalswipe.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#0D7377", textDecoration: "none" }}
+            >
+              ClinicalSwipe
+            </a>
+            , and 30+ condition channels. One install remembers them all.
+          </p>
+        </section>
+
+        {/* Bottom CTA — kept but deemphasized since the hero now carries
+            the primary Install CTA. This row stays as a "second chance"
+            for visitors who scrolled past the hero without clicking. */}
+        <section
+          id="get-chanio"
           style={{
             background:
               "linear-gradient(135deg, rgba(13,115,119,0.12) 0%, rgba(107,76,240,0.08) 100%)",
             borderTop: "1px solid rgba(13,115,119,0.18)",
-            padding: "80px 24px",
+            padding: "64px 24px",
             textAlign: "center",
-            marginTop: 40,
+            marginTop: 24,
           }}
         >
           <h2
             style={{
-              fontSize: "clamp(24px, 4vw, 42px)",
+              fontSize: "clamp(22px, 3.5vw, 36px)",
               fontWeight: 900,
               letterSpacing: "-1px",
               color: "#E8EDF2",
-              marginBottom: 16,
-              lineHeight: 1.1,
+              marginBottom: 14,
+              lineHeight: 1.15,
             }}
           >
             Install chanio
           </h2>
           <p
             style={{
-              fontSize: 18,
+              fontSize: 16,
               color: "#8899A6",
               maxWidth: 440,
-              margin: "0 auto 36px",
+              margin: "0 auto 28px",
               lineHeight: 1.6,
             }}
           >
-            Your AI learns what matters to you as you browse. The more you use it, the more useful this page becomes.
+            Your AI learns what matters to you as you browse. The more you use
+            it, the more useful this page becomes.
           </p>
           <a
             href="https://chrome.google.com/webstore"
@@ -436,17 +858,17 @@ export default function SurfPage() {
             style={{
               background: "#0D7377",
               color: "white",
-              padding: "16px 40px",
-              borderRadius: 12,
+              padding: "14px 32px",
+              borderRadius: 10,
               textDecoration: "none",
-              fontSize: 17,
+              fontSize: 15,
               fontWeight: 700,
               display: "inline-flex",
               alignItems: "center",
               gap: 10,
             }}
           >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
               <path
                 d="M15 8A7 7 0 112 8"
                 stroke="white"
@@ -465,8 +887,8 @@ export default function SurfPage() {
           </a>
           <p
             style={{
-              marginTop: 16,
-              fontSize: 13,
+              marginTop: 14,
+              fontSize: 12,
               color: "#8899A6",
               opacity: 0.6,
             }}

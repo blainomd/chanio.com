@@ -29,9 +29,9 @@ const NEXT_STEPS: Array<{ n: number; title: string; body: string; key?: string }
   },
   {
     n: 4,
-    title: "Ask Sage",
+    title: "Ask Reed",
     body:
-      "Click the chat bubble — Sage knows about the page you're on, your saves, and the broader web. Ask anything.",
+      "Click the chat bubble — Reed knows about the page you're on, your saves, and the broader web. Ask anything.",
     key: "⌘⇧C  /  Ctrl+Shift+C",
   },
 ];
